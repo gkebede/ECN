@@ -12,6 +12,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>( opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MemebersDbConnection")));
+builder.Services.AddCors( opt => { 
+    opt.AddPolicy("CorsPolicy", policy => 
+    {
+      policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,7 +28,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
@@ -53,3 +64,32 @@ app.Run();
 // NOT TO REFERENCE
 // dotnet watch --no-hot-reload   -- to reload 
 // github1s.com/
+
+
+//====================
+// …or create a new repository on the command line
+
+// echo "# ECN" >> README.md
+// git init
+// git add README.md
+// git commit -m "first commit"
+// git branch -M main
+// git remote add origin https://github.com/gkebede/ECN.git
+// git push -u origin main
+
+//====================
+
+// …or push an existing repository from the command line
+
+// git remote add origin https://github.com/gkebede/ECN.git
+// git branch -M main
+// git push -u origin main
+
+//   cd client-app
+//   npm install
+//   npm run dev
+
+
+// FOR LOWER VERSION 
+// EntityFramwork 
+ // 1- search for --- 
